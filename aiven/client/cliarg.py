@@ -215,3 +215,8 @@ arg.tech_email = arg("--tech-email", action="append", help="Tech email address")
 arg.flink_application_id = arg("--application-id", required=True, help="Flink application id")
 arg.flink_application_version_id = arg("--application-version-id", required=True, help="Flink application version id")
 arg.flink_deployment_id = arg("--deployment-id", required=True, help="Flink deployment id")
+
+arg.flink_jar_application_id = arg("--jar-application-id", required=True, help="Flink jar application id")
+arg.flink_jar_application_version_id = arg("--jar-application-version-id", required=True, help="Flink jar application version id")
+arg.flink_jar_deployment_id = arg("--jar-deployment-id", required=True, help="Flink jar deployment id")
+arg.flink_jar_filename = arg("--flink-jar-filename", required=True, help="Flink jar filename")

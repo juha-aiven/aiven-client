@@ -14,6 +14,7 @@ from aiven.client.pretty import TableLayout
 from aiven.client.speller import suggest
 from argparse import ArgumentParser
 from ast import literal_eval
+from base64 import b64encode
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
@@ -5503,6 +5504,215 @@ server_encryption_options:
                 service=self.args.service_name,
                 application_id=self.args.application_id,
                 deployment_id=self.args.deployment_id,
+            ),
+        )
+
+
+    @arg.project
+    @arg.service_name
+    def service__flink__list_jar_applications(self) -> None:
+        """List Flink jar applications"""
+        self.print_response(
+            self.client.flink_list_jar_applications(
+                project=self.args.project,
+                service=self.args.service_name,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.json_path_or_string("jar_application_properties")
+    def service__flink__create_jar_application(self) -> None:
+        """Create Flink jar application"""
+        self.print_response(
+            self.client.flink_create_jar_application(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_properties=self.args.jar_application_properties,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    def service__flink__get_jar_application(self) -> None:
+        """Get Flink jar application"""
+        self.print_response(
+            self.client.flink_get_jar_application(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.json_path_or_string("jar_application_properties")
+    def service__flink__update_jar_application(self) -> None:
+        """Update Flink jar application"""
+        self.print_response(
+            self.client.flink_update_jar_application(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_application_properties=self.args.jar_application_properties,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    def service__flink__delete_jar_application(self) -> None:
+        """Delete Flink jar application"""
+        self.print_response(
+            self.client.flink_delete_jar_application(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_filename
+    @arg.json_path_or_string("jar_application_version_properties")
+    def service__flink__create_jar_application_version(self) -> None:
+        """Create Flink jar application version"""
+        jar_filename = self.args.flink_jar_filename
+        if not os.path.isfile(jar_filename):
+            raise argx.UserError("No such file {!r}".format(jar_filename))
+        with open(jar_filename, "rb") as fob:
+            jar_bytes = fob.read()
+        jar = b64encode(jar_bytes).decode("ascii")
+        jar_application_version_properties = {}
+        jar_application_version_properties.update(self.args.jar_application_version_properties)
+        jar_application_version_properties["jar"] = jar
+        self.print_response(
+            self.client.flink_create_jar_application_version(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_application_version_properties=jar_application_version_properties,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_application_version_id
+    def service__flink__get_jar_application_version(self) -> None:
+        """Get Flink jar application version"""
+        self.print_response(
+            self.client.flink_get_jar_application_version(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_application_version_id=self.args.jar_application_version_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_application_version_id
+    def service__flink__delete_jar_application_version(self) -> None:
+        """Delete Flink jar application version"""
+        self.print_response(
+            self.client.flink_delete_jar_application_version(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_application_version_id=self.args.jar_application_version_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    def service__flink__list_jar_application_deployments(self) -> None:
+        """List Flink jar application deployments"""
+        self.print_response(
+            self.client.flink_list_jar_application_deployments(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_deployment_id
+    def service__flink__get_jar_application_deployment(self) -> None:
+        """Get Flink jar application deployment"""
+        self.print_response(
+            self.client.flink_get_jar_application_deployment(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_deployment_id=self.args.jar_deployment_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.json_path_or_string("jar_deployment_properties")
+    def service__flink__create_jar_application_deployment(self) -> None:
+        """Create Flink jar application deployment"""
+        self.print_response(
+            self.client.flink_create_jar_application_deployment(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_deployment_properties=self.args.jar_deployment_properties,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_deployment_id
+    def service__flink__delete_jar_application_deployment(self) -> None:
+        """Delete Flink jar application deployment"""
+        self.print_response(
+            self.client.flink_delete_jar_application_deployment(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_deployment_id=self.args.jar_deployment_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_deployment_id
+    def service__flink__stop_jar_application_deployment(self) -> None:
+        """Stop Flink jar application deployment"""
+        self.print_response(
+            self.client.flink_stop_jar_application_deployment(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_deployment_id=self.args.jar_deployment_id,
+            ),
+        )
+
+    @arg.project
+    @arg.service_name
+    @arg.flink_jar_application_id
+    @arg.flink_jar_deployment_id
+    def service__flink__cancel_jar_application_deployments(self) -> None:
+        """Cancel Flink jar application deployment"""
+        self.print_response(
+            self.client.flink_cancel_jar_application_deployment(
+                project=self.args.project,
+                service=self.args.service_name,
+                jar_application_id=self.args.jar_application_id,
+                jar_deployment_id=self.args.jar_deployment_id,
             ),
         )
 

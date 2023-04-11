@@ -2469,3 +2469,310 @@ class AivenClient(AivenClientBase):
                 "cancel",
             ),
         )
+
+    def flink_list_jar_applications(
+        self,
+        *,
+        project: str,
+        service: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.get,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+            ),
+        )
+
+    def flink_create_jar_application(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_properties: Mapping[str, Any],
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.post,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+            ),
+            body=jar_application_properties,
+        )
+
+    def flink_get_jar_application(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.get,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+            ),
+        )
+
+    def flink_update_jar_application(
+        self,
+        *,
+        project: str,
+        service: str,
+        application_id: str,
+        jar_application_properties: Mapping[str, str],
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.put,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                application_id,
+            ),
+            body=jar_application_properties,
+        )
+
+    def flink_delete_jar_application(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.delete,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+            ),
+        )
+
+    def flink_create_jar_application_version(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_application_version_properties: Mapping[str, Any],
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.post,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "version",
+            ),
+            body=jar_application_version_properties,
+        )
+
+    def flink_get_jar_application_version(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_application_version_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.get,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "version",
+                jar_application_version_id,
+            ),
+        )
+
+    def flink_delete_jar_application_version(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_application_version_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.delete,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "version",
+                jar_application_version_id,
+            ),
+        )
+
+    def flink_list_jar_application_deployments(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.get,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "deployment",
+            ),
+        )
+
+    def flink_get_jar_application_deployment(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_deployment_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.get,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "application",
+                jar_application_id,
+                "deployment",
+                jar_deployment_id,
+            ),
+        )
+
+    def flink_create_jar_application_deployment(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_deployment_properties: Mapping[str, Any],
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.post,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "deployment",
+            ),
+            body=jar_deployment_properties,
+        )
+
+    def flink_delete_jar_application_deployment(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_deployment_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.delete,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "deployment",
+                jar_deployment_id,
+            ),
+        )
+
+    def flink_stop_jar_application_deployment(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_deployment_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.post,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "deployment",
+                jar_deployment_id,
+                "stop",
+            ),
+        )
+
+    def flink_cancel_jar_application_deployment(
+        self,
+        *,
+        project: str,
+        service: str,
+        jar_application_id: str,
+        jar_deployment_id: str,
+    ) -> Mapping[Any, Any]:
+        return self.verify(
+            self.post,
+            self.build_path(
+                "project",
+                project,
+                "service",
+                service,
+                "flink",
+                "jar_application",
+                jar_application_id,
+                "deployment",
+                jar_deployment_id,
+                "cancel",
+            ),
+        )
